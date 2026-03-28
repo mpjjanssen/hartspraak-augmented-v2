@@ -1,9 +1,6 @@
 /**
  * Hartspraak — Substantie-ondersteunde Psychotherapie
  * augmented.hartspraak.com
- * 
- * Stap 1: Hub-landingspagina + login
- * Volgende stappen: /mdma, /psilocybine, /psiloreset, /intensive
  */
 require('dotenv').config();
 const express = require('express');
@@ -45,13 +42,15 @@ app.post('/login', (req, res) => {
 // Hub landingspagina
 app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')));
 
-// === Toekomstige routes (worden stap voor stap toegevoegd) ===
-// app.get('/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
+// MDMA
+app.get('/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
+
+// Toekomstige routes (worden stap voor stap toegevoegd)
 // app.get('/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psilocybine.html')));
 // app.get('/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psiloreset.html')));
 // app.get('/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'intensive.html')));
 
-// Downloads (A Dose of Hope PDFs)
+// Downloads
 app.get('/downloads/:filename', requireAuth, (req, res) => {
     res.download(path.join(__dirname, req.params.filename));
 });
@@ -61,7 +60,7 @@ app.get('/logout', (req, res) => {
     req.session.destroy(() => res.redirect('/login'));
 });
 
-// Catch-all: alles wat niet bestaat gaat naar de hub
+// Catch-all
 app.get('*', requireAuth, (req, res) => res.redirect('/'));
 
 const PORT = process.env.PORT || 3000;
