@@ -45,10 +45,14 @@ app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views
 // MDMA
 app.get('/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
 
-// Toekomstige routes (worden stap voor stap toegevoegd)
+// Psilocybine
 app.get('/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psilocybine.html')));
-// app.get('/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psiloreset.html')));
-// app.get('/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'intensive.html')));
+
+// PsiloReset
+app.get('/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psiloreset.html')));
+
+// De Intensive
+app.get('/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'intensive.html')));
 
 // Downloads
 app.get('/downloads/:filename', requireAuth, (req, res) => {
