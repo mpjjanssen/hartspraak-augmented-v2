@@ -39,13 +39,15 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Hub landingspagina
-app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')));
+// MDMA pages (main site) — NL at root, EN at /en, DE at /de
+app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
+app.get('/en', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-mdma.html')));
+app.get('/de', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-mdma.html')));
 
-// MDMA
-app.get('/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
-app.get('/en/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-mdma.html')));
-app.get('/de/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-mdma.html')));
+// Legacy routes (redirect to new structure)
+app.get('/mdma', requireAuth, (req, res) => res.redirect('/'));
+app.get('/en/mdma', requireAuth, (req, res) => res.redirect('/en'));
+app.get('/de/mdma', requireAuth, (req, res) => res.redirect('/de'));
 
 // Psilocybine
 app.get('/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psilocybine.html')));
