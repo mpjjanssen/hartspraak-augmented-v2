@@ -44,6 +44,8 @@ app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views
 
 // MDMA
 app.get('/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
+app.get('/en/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-mdma.html')));
+app.get('/de/mdma', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-mdma.html')));
 
 // Psilocybine
 app.get('/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psilocybine.html')));
