@@ -39,6 +39,11 @@ app.post('/login', (req, res) => {
     }
 });
 
+// Hub / Landing page
+app.get('/hub', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')));
+app.get('/en/hub', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-index.html')));
+app.get('/de/hub', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-index.html')));
+
 // MDMA pages (main site) — NL at root, EN at /en, DE at /de
 app.get('/', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'mdma.html')));
 app.get('/en', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-mdma.html')));
@@ -49,14 +54,22 @@ app.get('/mdma', requireAuth, (req, res) => res.redirect('/'));
 app.get('/en/mdma', requireAuth, (req, res) => res.redirect('/en'));
 app.get('/de/mdma', requireAuth, (req, res) => res.redirect('/de'));
 
-// Psilocybine
+// Psilocybine — NL, EN, DE
 app.get('/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psilocybine.html')));
+app.get('/en/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-psilocybine.html')));
+app.get('/de/psilocybine', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-psilocybine.html')));
+// Legacy EN route
+app.get('/en/psilocybin', requireAuth, (req, res) => res.redirect('/en/psilocybine'));
 
-// PsiloReset
+// PsiloReset — NL, EN, DE
 app.get('/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'psiloreset.html')));
+app.get('/en/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-psiloreset.html')));
+app.get('/de/psiloreset', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-psiloreset.html')));
 
-// De Intensive
+// De Intensive — NL, EN, DE
 app.get('/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'intensive.html')));
+app.get('/en/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-intensive.html')));
+app.get('/de/intensive', requireAuth, (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-intensive.html')));
 
 // Downloads
 app.get('/downloads/:filename', requireAuth, (req, res) => {
