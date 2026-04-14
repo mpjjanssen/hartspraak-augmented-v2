@@ -25,17 +25,28 @@ app.get('/logo.jpg', (req, res) => res.sendFile(path.join(__dirname, 'logo.jpg')
 
 function requireAuth(req, res, next) {
     if (req.session && req.session.authenticated) return next();
-    res.redirect('/login');
+    if (req.path.startsWith('/en')) res.redirect('/en/login');
+    else if (req.path.startsWith('/de')) res.redirect('/de/login');
+    else res.redirect('/login');
 }
 
-// Login
+// Login — NL, EN, DE
 app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'views', 'login.html')));
+app.get('/en/login', (req, res) => res.sendFile(path.join(__dirname, 'views', 'en-login.html')));
+app.get('/de/login', (req, res) => res.sendFile(path.join(__dirname, 'views', 'de-login.html')));
 app.post('/login', (req, res) => {
     if (req.body.accessCode === ACCESS_CODE) {
         req.session.authenticated = true;
-        res.redirect('/');
+        // Redirect to language-appropriate home based on referer
+        const ref = req.get('Referer') || '';
+        if (ref.includes('/en/')) res.redirect('/en');
+        else if (ref.includes('/de/')) res.redirect('/de');
+        else res.redirect('/');
     } else {
-        res.redirect('/login?error=1');
+        const ref = req.get('Referer') || '';
+        if (ref.includes('/en/')) res.redirect('/en/login?error=1');
+        else if (ref.includes('/de/')) res.redirect('/de/login?error=1');
+        else res.redirect('/login?error=1');
     }
 });
 

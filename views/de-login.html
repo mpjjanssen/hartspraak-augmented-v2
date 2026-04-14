@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toegang | Hartspraak</title>
+    <title>Zugang | Hartspraak</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,18 +68,18 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="lang-switcher"><span class="lang-active">NL</span> | <a href="/en/login">EN</a> | <a href="/de/login">DE</a></div>
+        <div class="lang-switcher"><a href="/login">NL</a> | <a href="/en/login">EN</a> | <span class="lang-active">DE</span></div>
         <div class="login-logo">
-            <h1>Substantie-ondersteunde Therapie</h1>
+            <h1>Substanzunterstützte Therapie</h1>
             <p>Hartspraak</p>
         </div>
-        <div class="error-msg" id="errorMsg">Onjuiste toegangscode. Probeer het opnieuw.</div>
+        <div class="error-msg" id="errorMsg">Falscher Zugangscode. Bitte versuchen Sie es erneut.</div>
         <form method="POST" action="/login">
             <div class="form-group">
-                <label for="accessCode">Toegangscode</label>
-                <input type="password" id="accessCode" name="accessCode" placeholder="Voer uw toegangscode in" required autofocus>
+                <label for="accessCode">Zugangscode</label>
+                <input type="password" id="accessCode" name="accessCode" placeholder="Geben Sie Ihren Zugangscode ein" required autofocus>
             </div>
-            <button type="submit" class="btn-login">Toegang</button>
+            <button type="submit" class="btn-login">Zugang</button>
         </form>
     </div>
     <script>
