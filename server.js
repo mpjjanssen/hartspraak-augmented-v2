@@ -1,6 +1,5 @@
 /**
- * Hartspraak — Substantie-ondersteunde Psychotherapie
- * augmented.hartspraak.com
+ * Augmented Psychotherapy — toegangsportaal
  */
 require('dotenv').config();
 const express = require('express');
@@ -9,10 +8,11 @@ const path = require('path');
 const app = express();
 app.set('trust proxy', 1);
 
-const ACCESS_CODE = process.env.ACCESS_CODE || 'hartspraak2025';
+const ACCESS_CODE = process.env.ACCESS_CODE || '';
+if (!ACCESS_CODE) console.warn('Warning: ACCESS_CODE environment variable not set');
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'hartspraak-hub-geheim-sleutel',
+    secret: process.env.SESSION_SECRET || 'change-me-in-production',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: process.env.NODE_ENV === 'production', httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
@@ -21,7 +21,6 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.get('/logo.jpg', (req, res) => res.sendFile(path.join(__dirname, 'logo.jpg')));
 
 function requireAuth(req, res, next) {
     if (req.session && req.session.authenticated) return next();
@@ -96,4 +95,4 @@ app.get('/logout', (req, res) => {
 app.get('*', requireAuth, (req, res) => res.redirect('/'));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Hub draait op poort ' + PORT));
+app.listen(PORT, () => console.log('Server draait op poort ' + PORT));
